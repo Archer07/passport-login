@@ -3,13 +3,20 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var validator = require('express-validator');
 var bodyParser = require('body-parser');
 var expressHbs = require('express-handlebars');
+var flash = require('connect-flash');
+var session = require('express-session');
+var passport = require('passport');
+
+var mongoose = require('mongoose');
+var configDB = require('./config/db.js');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
-
+mongoose.connect(configDB.url);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', expressHbs({defaultLayout:'layout'}));
