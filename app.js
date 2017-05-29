@@ -13,8 +13,6 @@ var passport = require('passport');
 var mongoose = require('mongoose');
 var configDB = require('./config/db.js');
 var index = require('./routes/index');
-var users = require('./routes/users');
-
 var app = express();
 mongoose.connect(configDB.url);
 // view engine setup
@@ -61,7 +59,6 @@ app.use(session({
 }));
 
 app.use('/', index);
-app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
