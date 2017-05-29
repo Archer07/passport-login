@@ -1,0 +1,8 @@
+{
+  "name": "login",
+  "version": "1.0.0",
+  "description": "A simple Node Login System with Passport ",
+  "main": "app.js",
+  "author": "Ayoub Nejjari <raysoflee07@gmail.com>",
+  "license": "MIT"
+}
