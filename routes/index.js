@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const User = require('../models/user.js');
+
 /* GET Login page. */
 router.get('/', (req, res, next) => {
   res.render('login', { title: 'Login page' });
@@ -32,8 +34,16 @@ router.post('/register', (req, res, next) => {
   if (errors) {
     res.render('register', {errors: errors});
   } else {
-    console.log('Success!');
-    res.redirect('dashbord');                                                                                                                                                                                   
+    const newUser = new User({
+      fullname: Fname,
+      username: username,
+      email: email,
+      password: password1
+    });
+    User.registerUser(newUser, (err, user) => {
+      if (err) throw err;
+      res.redirect('/login');
+    });
   }
 
 });
