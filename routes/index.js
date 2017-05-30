@@ -1,14 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+/* GET Login page. */
 router.get('/', function(req, res, next) {
   res.render('login', { title: 'Login page' });
 });
 
-/* GET home page. */
+/* GET Register page. */
 router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Become a memeber' });
+});
+
+/* GET dashbord page. */
+router.get('/dashbord', function(req, res, next) {
+  res.render('dashbord', { title: 'User Panel', layout: 'dashbord_layout' });
 });
 
 module.exports = router;

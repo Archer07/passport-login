@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Dashbord</title>
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/dashbord.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+
+
+  </head>
+  <body>
+      {{{messages}}}
+      {{#if errors}}
+        {{#each}}
+          {{{msg}}}
+        {{/each}}
+      {{/if}}
+      <div class='container'>
+        {{{body}}}
+      </div>
+      <script src='/javascripts/bootstrap.min.js'></script>
+  </body>
+</html>
