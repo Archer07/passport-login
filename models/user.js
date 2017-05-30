@@ -6,7 +6,7 @@ mongoose.connect(db.url);
 
 
 const UserSchema = mongoose.Schema({
-    name: {
+    fullname: {
       type: String
     },
     username: {
