@@ -1,20 +1,28 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var expressValidator = require('express-validator');
-var bodyParser = require('body-parser');
-var expressHbs = require('express-handlebars');
-var flash = require('connect-flash');
-var session = require('express-session');
-var passport = require('passport');
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const expressValidator = require('express-validator');
+const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
+const flash = require('connect-flash');
+const session = require('express-session');
+const passport = require('passport');
+const mongoose = require('mongoose');
 
-var mongoose = require('mongoose');
-var configDB = require('./config/db.js');
-var index = require('./routes/index');
+const configDB = require('./config/db.js');
+
+
+// Routes
+const index = require('./routes/index');
+
 var app = express();
+
+// DB connection
 mongoose.connect(configDB.url);
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', expressHbs({defaultLayout:'layout'}));
@@ -22,18 +30,29 @@ app.set('view engine', 'handlebars');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+// HTTP request logger middleware for nodejs
 app.use(logger('dev'));
+
+// body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+// cookie Parser middleware
 app.use(cookieParser());
+
+// static files server middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// middleware for flash messages
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
   res.locals.messages = require('express-messages')(req, res);
   next();
 });
 
+// form validation middleware
 app.use(expressValidator({
   errorFormatter: function(param, msg, value) {
       var namespace = param.split('.')
