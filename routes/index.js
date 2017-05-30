@@ -13,7 +13,7 @@ router.get('/register', function(req, res, next) {
 
 /* GET dashbord page. */
 router.get('/dashbord', function(req, res, next) {
-  res.render('dashbord', { title: 'User Panel', layout: 'dashbord_layout' });
+  res.render('dashbord', { title: 'User Panel', layout: 'dashbord_layout', user: {username:'Archer'} });
 });
 
 module.exports = router;
