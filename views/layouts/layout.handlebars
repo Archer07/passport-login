@@ -13,8 +13,8 @@
   <body>
       {{{messages}}}
       {{#if errors}}
-        {{#each}}
-          {{{msg}}}
+        {{#each errors}}
+          <div class='alert alert-danger'>{{{msg}}}</div>
         {{/each}}
       {{/if}}
       <div class='container'>

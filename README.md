@@ -24,3 +24,5 @@ In this project I will be building a fully functional user authentication system
   * Object Document Mapper/Mapping. An ODM maps between an Object Model and a Document database. It uses JSON or JSONB api to translate the object notation to Document notation.
 * Flash messages:
   * It's a type of user data that is meant to be shown once and then destroyed. A flash message is a kind of temporary variable, more specifically, a temporary session for displaying error/warning/success... messages to the user. **connect-flash** is a common module for creating flash messages.
+* Sanitization:
+  * A process performed after form validation to make sure the input data doesn't contain code.

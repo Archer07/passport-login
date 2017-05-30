@@ -1,17 +1,17 @@
-<form class="form-signin">
+<form class="form-signin" action="/register" method="post">
       <h2 class="form-signin-heading">{{title}}</h2>
       <label class="sr-only">Full Name</label>
-      <input type="text" class="form-control" placeholder="Full Name" required autofocus>
+      <input type="text" class="form-control" name="Fname" placeholder="Full Name"  autofocus>
 
       <label class="sr-only">Username</label>
-      <input type="text" class="form-control" placeholder="Username" required autofocus>
+      <input type="text" class="form-control" name="username" placeholder="Username"  autofocus>
 
       <label class="sr-only">Email address</label>
-      <input type="email" class="form-control" placeholder="Email address" required autofocus>
+      <input type="email" class="form-control" name="email" placeholder="Email address"  autofocus>
 
       <label class="sr-only">Password</label>
-      <input type="password" class="form-control" placeholder="Password" required>
-      <input type="password" class="form-control" placeholder="Confirm Password" required>
+      <input type="password" class="form-control" name="password1" placeholder="Password" >
+      <input type="password" class="form-control" name="password2" placeholder="Confirm Password">
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
       <a class='reg' href="/">Already a member? Log in here</a>
