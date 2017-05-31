@@ -4,6 +4,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
+const expMsgs = require('express-messages');
 const bodyParser = require('body-parser');
 const expressHbs = require('express-handlebars');
 const flash = require('connect-flash');
@@ -49,15 +50,22 @@ app.use(cookieParser());
 // static files server middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
+// session middleware
+app.use(session({
+  secret:'secret',
+  resave:false,
+  saveUninitialized:true,
+  //cookie: { secure: true }
+}));
 
 // middleware for flash messages
-app.use(require('connect-flash')());
-app.use(function (req, res, next) {
+app.use(flash());
+app.use((req, res, next) => {
   // the below method doesn't work with handlebars because Javascript expression are not allowed
-  // res.locals.messages = require('express-messages')(req, res);
-  // next();
+  //res.locals.messages = expMsgs(req, res);
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
+  next();
 });
 
 // form validation middleware
@@ -78,12 +86,6 @@ app.use(expressValidator({
   }
 }));
 
-app.use(session({
-  secret:'secret',
-  resave:false,
-  saveUninitialized:true,
-  cookie: { secure: true }
-}));
 
 app.use('/', index);
 
