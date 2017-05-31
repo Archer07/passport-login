@@ -11,18 +11,25 @@
 
   </head>
   <body>
+    <!-- messages for handling success and failure of registration - flash messages -->
     {{#if success_msg}}
       <div class='alert alert-success'>{{success_msg}}</div>
     {{/if}}
     {{#if error_msg}}
       <div class='alert alert-danger'>{{error_msg}}</div>
     {{/if}}
+    <!-- messages for handling success and failure of registration - flash messages -->
+
+    <!-- Error messages for form validation - Express validator meassages -->
       {{{messages}}}
       {{#if errors}}
         {{#each errors}}
           <div class='alert alert-danger'>{{{msg}}}</div>
         {{/each}}
       {{/if}}
+      <!-- Error messages for form validation - Express validator meassages -->
+
+      
       <div class='container'>
         {{{body}}}
       </div>
