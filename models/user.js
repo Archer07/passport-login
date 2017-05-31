@@ -4,7 +4,7 @@ const db = require('../config/db.js');
 
 mongoose.connect(db.url);
 
-
+// User Schema
 const UserSchema = mongoose.Schema({
     fullname: {
       type: String

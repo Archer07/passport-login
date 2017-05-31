@@ -42,7 +42,7 @@ router.post('/register', (req, res, next) => {
     });
     User.registerUser(newUser, (err, user) => {
       if (err) throw err;
-      res.redirect('/login');
+      res.redirect('/');
     });
   }
 

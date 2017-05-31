@@ -21,6 +21,11 @@ var app = express();
 
 // DB connection
 mongoose.connect(configDB.url);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+  console.log('We are connected to the Database!');
+});
 
 
 // view engine setup
@@ -48,8 +53,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // middleware for flash messages
 app.use(require('connect-flash')());
 app.use(function (req, res, next) {
-  res.locals.messages = require('express-messages')(req, res);
-  next();
+  // the below method doesn't work with handlebars because Javascript expression are not allowed
+  // res.locals.messages = require('express-messages')(req, res);
+  // next();
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
 });
 
 // form validation middleware
