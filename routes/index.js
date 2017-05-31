@@ -1,4 +1,6 @@
 const express = require('express');
+const passport - require('passport');
+const localStartegy = require('passport-local').Strategy;
 const router = express.Router();
 
 const User = require('../models/user.js');
@@ -48,6 +50,14 @@ router.post('/register', (req, res, next) => {
   }
 
 });
+
+// Login processing
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/dashbord',
+  });
+});
+
 /* GET dashbord page. */
 router.get('/dashbord', (req, res, next) => {
   res.render('dashbord', { title: 'User Panel', layout: 'dashbord_layout', user: {username:'Archer'} });
