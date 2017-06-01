@@ -1,5 +1,5 @@
 const express = require('express');
-const passport - require('passport');
+const passport = require('passport');
 const localStartegy = require('passport-local').Strategy;
 const router = express.Router();
 
