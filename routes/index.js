@@ -50,6 +50,10 @@ router.post('/register', (req, res, next) => {
   }
 
 });
+// Local strategy
+passport.use(new localStartegy( (username, password, done) => {
+
+}));
 
 // Login processing
 router.post('/login', (req, res, next) => {
