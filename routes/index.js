@@ -6,6 +6,8 @@ const router = express.Router();
 const User = require('../models/user.js');
 
 /* GET Login page. */
+// Access control
+
 router.get('/', (req, res, next) => {
   res.render('login', { title: 'Login page' });
 });
@@ -13,6 +15,13 @@ router.get('/', (req, res, next) => {
 /* GET Register page. */
 router.get('/register',(req, res, next) => {
   res.render('register', { title: 'Become a memeber' });
+});
+
+// Log out route
+router.get('/logout', (req, res, next) => {
+  req.logout();
+  req.flash('success_msg', 'You are logged out');
+  res.redirect('/');
 });
 
 /* POST request for registration */
@@ -91,8 +100,20 @@ router.post('/login', (req, res, next) => {
   })(req, res, next);
 });
 
+// Access Control
+let isAuthorized = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    req.flash('error_msg', 'You are not authorized to access this page.');
+    res.redirect('/');
+  }
+}
+
+
+
 /* GET dashbord page. */
-router.get('/dashbord', (req, res, next) => {
+router.get('/dashbord', isAuthorized, (req, res, next) => {
   res.render('dashbord', { title: 'User Panel', layout: 'dashbord_layout', user: {username:'Archer'} });
 });
 
