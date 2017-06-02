@@ -20,6 +20,9 @@ const UserSchema = mongoose.Schema({
     }
 });
 
+// functions to be created
+// getByUsername, comparePass, getById
+
 // model export
 const User = module.exports = mongoose.model('User', UserSchema);
 

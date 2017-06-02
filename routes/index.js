@@ -52,17 +52,34 @@ router.post('/register', (req, res, next) => {
 });
 // Local strategy
 passport.use(new localStartegy( (username, password, done) => {
-  User.findOne({username:username}, (err, user) => {
-    if (err) {return done(err);}
-    if (!user) {
-      return done(null, false, {message: 'Incorrect username.'});
-    }
-    if (!user.validPassword(password)) {
-      return done(null, false, { message: 'Incorrect password.' });
-    }
-    return done(null, user);
-  });
+    User.getByUsername(username, (err, user) => {
+        if (err) throw err;
+        if (!user) {
+          return done(null, false, {message: 'User does not exist.'});
+        }
+
+        User.comparePass(password, user.password, (err, isMatch) {
+          if (err) throw err;
+          if (isMatch) {
+            return done(null, user);
+          } else {
+            return done(null, false, {message: 'Password Incorrect.'});
+          }
+        });
+    });
 }));
+
+// Serialization and deserialization
+
+passport.serializeUser((err, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser((id, done) {
+  User.getById(id, (err, user) {
+    done(err, user);
+  });
+});
 
 // Login processing
 router.post('/login', (req, res, next) => {
