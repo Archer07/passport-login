@@ -18,6 +18,9 @@
     {{#if error_msg}}
       <div class='alert alert-danger'>{{error_msg}}</div>
     {{/if}}
+    {{#if error}}
+      <div class='alert alert-danger'>{{error}}</div>
+    {{/if}}
     <!-- messages for handling success and failure of registration - flash messages -->
 
     <!-- Error messages for form validation - Express validator meassages -->
@@ -29,7 +32,7 @@
       {{/if}}
       <!-- Error messages for form validation - Express validator meassages -->
 
-      
+
       <div class='container'>
         {{{body}}}
       </div>

@@ -69,8 +69,12 @@ app.use((req, res, next) => {
   //res.locals.messages = expMsgs(req, res);
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error');
+  // console.log(req.locals);
+  res.locals.user = req.user || null;
   next();
 });
+
 
 // form validation middleware
 app.use(expressValidator({

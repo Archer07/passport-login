@@ -58,7 +58,7 @@ passport.use(new localStartegy( (username, password, done) => {
           return done(null, false, {message: 'User does not exist.'});
         }
 
-        User.comparePass(password, user.password, (err, isMatch) {
+        User.comparePass(password, user.password, (err, isMatch) => {
           if (err) throw err;
           if (isMatch) {
             return done(null, user);
@@ -66,17 +66,18 @@ passport.use(new localStartegy( (username, password, done) => {
             return done(null, false, {message: 'Password Incorrect.'});
           }
         });
+
     });
 }));
 
 // Serialization and deserialization
 
-passport.serializeUser((err, done) {
+passport.serializeUser((user, done) => {
     done(null, user.id);
 });
 
-passport.deserializeUser((id, done) {
-  User.getById(id, (err, user) {
+passport.deserializeUser((id, done) =>  {
+  User.getById(id, (err, user) => {
     done(err, user);
   });
 });
@@ -87,9 +88,7 @@ router.post('/login', (req, res, next) => {
     successRedirect: '/dashbord',
     failureRedirect: '/',
     failureFlash: true
-  }, (req, res) => {
-    res.redirect('/');
-  });
+  })(req, res, next);
 });
 
 /* GET dashbord page. */
