@@ -58,6 +58,10 @@ app.use(session({
   //cookie: { secure: true }
 }));
 
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 // middleware for flash messages
 app.use(flash());
 app.use((req, res, next) => {
